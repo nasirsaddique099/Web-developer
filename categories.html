@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categories - My Blog</title>
+  <link rel="stylesheet" href="blog.css">
+  <style>
+    /* Additional styles for categories page */
+    .categories-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .categories-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .categories-title {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .categories-subtitle {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    
+    .category-card {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .category-image {
+      height: 180px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .category-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .category-card:hover .category-image img {
+      transform: scale(1.1);
+    }
+    
+    .category-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+    }
+    
+    .category-content {
+      padding: 20px;
+      background-color: #fff;
+    }
+    
+    .category-name {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    
+    .category-description {
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+    
+    .category-meta {
+      display: flex;
+      justify-content: space-between;
+      color: #888;
+      font-size: 0.9rem;
+    }
+    
+    .category-link {
+      display: inline-block;
+      margin-top: 15px;
+      color: #0066cc;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .category-link:hover {
+      color: #004080;
+    }
+    
+    .category-link:after {
+      content: ' →';
+    }
+    
+    .featured-category {
+      position: relative;
+      grid-column: span 2;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .featured-category .category-image {
+      height: 250px;
+    }
+    
+    .featured-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background-color: #0066cc;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 1;
+    }
+    
+    .category-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+      justify-content: center;
+    }
+    
+    .filter-btn {
+      background-color: #f0f0f0;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    
+    .filter-btn:hover {
+      background-color: #e0e0e0;
+    }
+    
+    .filter-btn.active {
+      background-color: #0066cc;
+      color: #fff;
+    }
+    
+    .category-search {
+      margin-bottom: 30px;
+      display: flex;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .category-search input {
+      flex: 1;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px 0 0 5px;
+      font-size: 1rem;
+    }
+    
+    .category-search button {
+      background-color: #0066cc;
+      color: #fff;
+      border: none;
+      padding: 0 20px;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .category-search button:hover {
+      background-color: #004080;
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+      font-size: 1.2rem;
+      grid-column: 1 / -1;
+    }
+    
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    
+    .pagination-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 5px;
+      border-radius: 50%;
+      background-color: #f0f0f0;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .pagination-btn:hover {
+      background-color: #e0e0e0;
+    }
+    
+    .pagination-btn.active {
+      background-color: #0066cc;
+      color: #fff;
+    }
+    
+    @media (max-width: 767px) {
+      .categories-container {
+        padding: 25px;
+      }
+      
+      .categories-title {
+        font-size: 2rem;
+      }
+      
+      .categories-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .featured-category {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">My Blog</h1>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="categories.html" class="active">Categories</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-content">
+    <div class="container">
+      <div class="categories-container">
+        <header class="categories-header">
+          <h1 class="categories-title">Blog Categories</h1>
+          <p class="categories-subtitle">Explore articles by topic to find exactly what you're looking for</p>
+        </header>
+        
+        <div class="category-search">
+          <input type="text" id="category-search-input" placeholder="Search categories...">
+          <button id="category-search-btn">Search</button>
+        </div>
+        
+        <div class="category-filter">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="development">Development</button>
+          <button class="filter-btn" data-filter="design">Design</button>
+          <button class="filter-btn" data-filter="technology">Technology</button>
+          <button class="filter-btn" data-filter="career">Career</button>
+          <button class="filter-btn" data-filter="tutorials">Tutorials</button>
+        </div>
+        
+        <div class="categories-grid" id="categories-grid">
+          <div class="category-card featured-category" data-category="development">
+            <div class="featured-badge">Featured</div>
+            <div class="category-image">
+              <img src="images (5).png" alt="Web Development">
+              <div class="category-overlay"></div>
+            </div>
+            <div class="category-content">
+              <h2 class="category-name">Web Development</h2>
+              <p class="category-description">Explore the latest trends, tools, and techniques in web development. From front-end frameworks to back-end architecture, this category covers everything you need to build modern web applications.</p>
+              <div class="category-meta">
+                <span>42 Articles</span>
+                <span>Last updated: 2 days ago</span>
+              </div>
+              <a href="#" class="category-link">View Articles</a>
+            </div>
+          </div>
+          
+          <div class="category-card" data-category="design">
+            <div class="category-image">
+              <img src="images (2).jpeg" alt="UI/UX Design">
+              <div class="category-overlay"></div>
+            </div>
+            <div class="category-content">
+              <h2 class="category-name">UI/UX Design</h2>
+              <p class="category-description">Learn about user interface and experience design principles, tools, and best practices for creating intuitive and beautiful digital products.</p>
+              <div class="category-meta">
+                <span>28 Articles</span>
+                <span>Last updated: 1 week ago</span>
+              </div>
+              <a href="#" class="category-link">View Articles</a>
+            </div>
+          </div>
+          
+          <div class="category-card" data-category="technology">
+            <div class="category-image">
+              <img src="images (3).jpeg" alt="Emerging Technologies">
+              <div class="category-overlay"></div>
+            </div>
+            <div class="category-content">
+              <h2 class="category-name">Emerging Technologies</h2>
+              <p class="category-description">Stay up-to-date with the latest emerging technologies, including AI, machine learning, blockchain, and more.</p>
+              <div class="category-meta">
+                <span>19 Articles</span>
+                <span>Last updated: 3 days ago</span>
+              </div>
+              <a href="#" class="category-link">View Articles</a>
+            </div>
+          </div>
+          
+          <div class="category-card" data-category="development">
+            <div class="category-image">
+              <img src="images (4).jpeg" alt="JavaScript Frameworks">
+              <div class="category-overlay"></div>
+            </div>
+            <div class="category-content">
+              <h2 class="category-name">JavaScript Frameworks</h2>
+              <p class="category-description">Deep dives into popular JavaScript frameworks like React, Vue, Angular, and more, with tutorials and best practices.</p>
+              <div class="category-meta">
+                <span>35 Articles</span>
+                <span>Last updated: 5 days ago</span>
+              </div>
+              <a href="#" class="category-link">View Articles</a>
+            </div>
+          </div>
+          
+          <div class="category-card" data-category="career">
+            <div class="category-image">
+              <img src="mobile-phones-buying-guide.jpg" alt="Career Development">
+              <div class="category-overlay"></div>
+            </div>
+            <div class="category-content">
+              <h2 class="category-name">Career Development</h2>
+              <p class="category-description">Tips, advice, and resources for advancing your career in tech, including interview preparation, resume building, and skill development.</p>
+              <div class="category-meta">
+                <span>23 Articles</span>
+                <span>Last updated: 2 weeks ago</span>
+              </div>
+              <a href="#" class="category-link">View Articles</a>
+            </div>
+          </div>
+          
+          <div class="category-card" data-category="tutorials">
+            <div class="category-image">
+              <img src="what-is-off-facebook-activity-featured.jpg" alt="Coding Tutorials">
+              <div class="category-overlay"></div>
+            </div>
+            <div class="category-content">
+              <h2 class="category-name">Coding Tutorials</h2>
+              <p class="category-description">Step-by-step tutorials for building projects, solving common programming problems, and learning new technologies.</p>
+              <div class="category-meta">
+                <span>47 Articles</span>
+                <span>Last updated: 1 day ago</span>
+              </div>
+              <a href="#" class="category-link">View Articles</a>
+            </div>
+          </div>
+          
+          <div class="category-card" data-category="design">
+            <div class="category-image">
+              <img src="images (2).jpeg" alt="Design Systems">
+              <div class="category-overlay"></div>
+            </div>
+            <div class="category-content">
+              <h2 class="category-name">Design Systems</h2>
+              <p class="category-description">Learn about creating and maintaining design systems that ensure consistency and efficiency across digital products.</p>
+              <div class="category-meta">
+                <span>16 Articles</span>
+                <span>Last updated: 1 month ago</span>
+              </div>
+              <a href="#" class="category-link">View Articles</a>
+            </div>
+          </div>
+          
+          <div class="category-card" data-category="technology">
+            <div class="category-image">
+              <img src="images (3).jpeg" alt="Cloud Computing">
+              <div class="category-overlay"></div>
+            </div>
+            <div class="category-content">
+              <h2 class="category-name">Cloud Computing</h2>
+              <p class="category-description">Explore cloud platforms, services, and best practices for deploying and scaling applications in the cloud.</p>
+              <div class="category-meta">
+                <span>21 Articles</span>
+                <span>Last updated: 2 weeks ago</span>
+              </div>
+              <a href="#" class="category-link">View Articles</a>
+            </div>
+          </div>
+          
+          <div class="category-card" data-category="tutorials">
+            <div class="category-image">
+              <img src="images (4).jpeg" alt="Mobile Development">
+              <div class="category-overlay"></div>
+            </div>
+            <div class="category-content">
+              <h2 class="category-name">Mobile Development</h2>
+              <p class="category-description">Tutorials and guides for building mobile applications using various frameworks and native technologies.</p>
+              <div class="category-meta">
+                <span>29 Articles</span>
+                <span>Last updated: 1 week ago</span>
+              </div>
+              <a href="#" class="category-link">View Articles</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="pagination">
+          <a href="#" class="pagination-btn active">1</a>
+          <a href="#" class="pagination-btn">2</a>
+          <a href="#" class="pagination-btn">3</a>
+          <a href="#" class="pagination-btn">→</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3>About My Blog</h3>
+          <p>A personal blog sharing insights and knowledge about web development, design, and technology.</p>
+        </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h3>Connect With Me</h3>
+          <div class="social-icons">
+            <a href="#" class="social-icon">Facebook</a>
+            <a href="#" class="social-icon">Twitter</a>
+            <a href="#" class="social-icon">Instagram</a>
+            <a href="#" class="social-icon">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 My Blog. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="blog.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Category filtering
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const categoryCards = document.querySelectorAll('.category-card');
+      const categoriesGrid = document.getElementById('categories-grid');
+      
+      // Search functionality
+      const searchInput = document.getElementById('category-search-input');
+      const searchButton = document.getElementById('category-search-btn');
+      
+      // Filter function
+      function filterCategories(filter) {
+        let visibleCount = 0;
+        
+        categoryCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'block';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        // Show no results message if needed
+        let noResultsElement = document.querySelector('.no-results');
+        if (visibleCount === 0) {
+          if (!noResultsElement) {
+            noResultsElement = document.createElement('div');
+            noResultsElement.className = 'no-results';
+            noResultsElement.textContent = 'No categories found matching your criteria.';
+            categoriesGrid.appendChild(noResultsElement);
+          }
+        } else if (noResultsElement) {
+          noResultsElement.remove();
+        }
+      }
+      
+      // Search function
+      function searchCategories(query) {
+        query = query.toLowerCase().trim();
+        let visibleCount = 0;
+        
+        if (query === '') {
+          // If search is empty, revert to current filter
+          const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+          filterCategories(activeFilter);
+          return;
+        }
+        
+        categoryCards.forEach(card => {
+          const categoryName = card.querySelector('.category-name').textContent.toLowerCase();
+          const categoryDesc = card.querySelector('.category-description').textContent.toLowerCase();
+          
+          if (categoryName.includes(query) || categoryDesc.includes(query)) {
+            card.style.display = 'block';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        // Show no results message if needed
+        let noResultsElement = document.querySelector('.no-results');
+        if (visibleCount === 0) {
+          if (!noResultsElement) {
+            noResultsElement = document.createElement('div');
+            noResultsElement.className = 'no-results';
+            noResultsElement.textContent = 'No categories found matching your search.';
+            categoriesGrid.appendChild(noResultsElement);
+          }
+        } else if (noResultsElement) {
+          noResultsElement.remove();
+        }
+      }
+      
+      // Add event listeners to filter buttons
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Update active button
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          // Filter categories
+          filterCategories(button.dataset.filter);
+        });
+      });
+      
+      // Add event listener to search button
+      searchButton.addEventListener('click', () => {
+        searchCategories(searchInput.value);
+      });
+      
+      // Add event listener for Enter key in search input
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          searchCategories(searchInput.value);
+        }
+      });
+      
+      // Pagination (simplified for demo)
+      const paginationButtons = document.querySelectorAll('.pagination-btn');
+      paginationButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          paginationButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          // In a real implementation, this would load the next page of categories
+          // For this demo, we'll just scroll to top
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

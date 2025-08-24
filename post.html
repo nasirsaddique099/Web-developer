@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started with Web Development in 2023 - My Blog</title>
+  <link rel="stylesheet" href="blog.css">
+  <style>
+    /* Additional styles for post page */
+    .post-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .post-title {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+    
+    .post-meta {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .post-featured-image {
+      margin-bottom: 30px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .post-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    
+    .post-content p,
+    .post-content ul,
+    .post-content ol,
+    .post-content blockquote {
+      margin-bottom: 25px;
+    }
+    
+    .post-content h2 {
+      font-size: 1.8rem;
+      margin: 40px 0 20px;
+    }
+    
+    .post-content h3 {
+      font-size: 1.5rem;
+      margin: 30px 0 15px;
+    }
+    
+    .post-content blockquote {
+      border-left: 4px solid #0066cc;
+      padding-left: 20px;
+      font-style: italic;
+      color: #555;
+    }
+    
+    .post-content code {
+      background-color: #f5f5f5;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    
+    .post-content pre {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      margin-bottom: 25px;
+    }
+    
+    .post-content pre code {
+      background-color: transparent;
+      padding: 0;
+    }
+    
+    .post-tags {
+      margin: 40px 0;
+    }
+    
+    .post-tag {
+      display: inline-block;
+      background-color: #f0f0f0;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      color: #555;
+      transition: all 0.3s ease;
+    }
+    
+    .post-tag:hover {
+      background-color: #0066cc;
+      color: #fff;
+    }
+    
+    .post-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 50px 0;
+      padding-top: 30px;
+      border-top: 1px solid #eee;
+    }
+    
+    .post-nav-link {
+      max-width: 48%;
+    }
+    
+    .post-nav-label {
+      display: block;
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 5px;
+    }
+    
+    .post-comments {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid #eee;
+    }
+    
+    .comment-form textarea {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      font-family: inherit;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    
+    .comment-form input[type="text"],
+    .comment-form input[type="email"] {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    
+    .comment-form button {
+      background-color: #0066cc;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .comment-form button:hover {
+      background-color: #004080;
+    }
+    
+    .author-bio {
+      display: flex;
+      align-items: center;
+      background-color: #f8f9fa;
+      padding: 25px;
+      border-radius: 8px;
+      margin: 40px 0;
+    }
+    
+    .author-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+    
+    .author-info h4 {
+      margin-bottom: 10px;
+    }
+    
+    .author-info p {
+      color: #666;
+      margin-bottom: 10px;
+    }
+    
+    .author-social a {
+      color: #0066cc;
+      margin-right: 15px;
+    }
+    
+    @media (max-width: 767px) {
+      .post-title {
+        font-size: 2rem;
+      }
+      
+      .post-navigation {
+        flex-direction: column;
+      }
+      
+      .post-nav-link {
+        max-width: 100%;
+        margin-bottom: 20px;
+      }
+      
+      .author-bio {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .author-avatar {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">My Blog</h1>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="categories.html">Categories</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-content">
+    <div class="container">
+      <article class="post-full">
+        <header class="post-header">
+          <span class="post-category">Technology</span>
+          <h1 class="post-title">Getting Started with Web Development in 2023</h1>
+          <div class="post-meta">
+            <span class="post-date">June 15, 2023</span>
+            <span class="post-author">by Admin</span>
+          </div>
+        </header>
+
+        <div class="post-featured-image">
+          <img src="images (5).jpeg" alt="Featured post image">
+        </div>
+
+        <div class="post-content">
+          <p>Web development continues to evolve at a rapid pace, with new technologies, frameworks, and best practices emerging regularly. If you're looking to start your journey as a web developer in 2023, this comprehensive guide will help you navigate the essential skills and tools you need to succeed.</p>
+          
+          <h2>Understanding the Fundamentals</h2>
+          <p>Before diving into complex frameworks and libraries, it's crucial to master the core technologies that power the web:</p>
+          
+          <h3>HTML (HyperText Markup Language)</h3>
+          <p>HTML provides the structure for web pages. Learn semantic HTML5 elements like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code> to create well-structured, accessible websites.</p>
+          
+          <h3>CSS (Cascading Style Sheets)</h3>
+          <p>CSS handles the presentation and styling of web pages. Focus on modern CSS features like Flexbox and Grid for layout, custom properties (variables), and responsive design principles.</p>
+          
+          <h3>JavaScript</h3>
+          <p>JavaScript brings interactivity to websites. Learn the fundamentals of modern JavaScript (ES6+), including:</p>
+          <ul>
+            <li>Variables, data types, and operators</li>
+            <li>Functions and arrow functions</li>
+            <li>Arrays and objects</li>
+            <li>DOM manipulation</li>
+            <li>Promises and async/await for handling asynchronous operations</li>
+          </ul>
+          
+          <blockquote>
+            <p>"The best way to learn web development is by building projects. Start small, then gradually increase complexity as your skills improve."</p>
+          </blockquote>
+          
+          <h2>Front-End Development</h2>
+          <p>Once you've mastered the basics, explore these front-end technologies:</p>
+          
+          <h3>CSS Preprocessors</h3>
+          <p>Tools like Sass or Less extend CSS with variables, mixins, and functions, making your stylesheets more maintainable.</p>
+          
+          <h3>Front-End Frameworks</h3>
+          <p>In 2023, these frameworks dominate the front-end landscape:</p>
+          <ul>
+            <li><strong>React</strong>: Developed by Facebook, React remains the most popular JavaScript library for building user interfaces.</li>
+            <li><strong>Vue.js</strong>: Known for its gentle learning curve and flexibility.</li>
+            <li><strong>Angular</strong>: A comprehensive framework maintained by Google, ideal for large-scale applications.</li>
+            <li><strong>Svelte</strong>: A newer approach that shifts work from runtime to compile time, resulting in highly optimized applications.</li>
+          </ul>
+          
+          <h3>Build Tools</h3>
+          <p>Modern web development relies on build tools to optimize code for production:</p>
+          <ul>
+            <li><strong>Vite</strong>: A fast build tool that leverages native ES modules for lightning-quick development.</li>
+            <li><strong>Webpack</strong>: A powerful bundler that can handle various asset types.</li>
+            <li><strong>Parcel</strong>: A zero-configuration bundler that works out of the box.</li>
+          </ul>
+          
+          <pre><code>// Example of a React component using hooks
+import { useState, useEffect } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+    document.title = `Count: ${count}`;
+  }, [count]);
+  
+  return (
+    &lt;div&gt;
+      &lt;p&gt;You clicked {count} times&lt;/p&gt;
+      &lt;button onClick={() => setCount(count + 1)}&gt;
+        Click me
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          
+          <h2>Back-End Development</h2>
+          <p>To build full-stack applications, you'll need back-end skills:</p>
+          
+          <h3>Server-Side Languages</h3>
+          <p>Popular options include:</p>
+          <ul>
+            <li><strong>Node.js</strong>: JavaScript on the server, allowing you to use the same language throughout your stack.</li>
+            <li><strong>Python</strong>: With frameworks like Django or Flask.</li>
+            <li><strong>Ruby</strong>: With Ruby on Rails.</li>
+            <li><strong>PHP</strong>: Still powers a significant portion of the web.</li>
+            <li><strong>Go</strong>: Known for performance and simplicity.</li>
+          </ul>
+          
+          <h3>Databases</h3>
+          <p>Learn at least one of each type:</p>
+          <ul>
+            <li><strong>Relational</strong>: PostgreSQL, MySQL</li>
+            <li><strong>NoSQL</strong>: MongoDB, Firebase</li>
+          </ul>
+          
+          <h3>API Development</h3>
+          <p>Understanding how to create and consume APIs is essential. Learn RESTful principles and explore GraphQL for more flexible data fetching.</p>
+          
+          <h2>Essential Developer Tools</h2>
+          <p>These tools will boost your productivity:</p>
+          <ul>
+            <li><strong>Git</strong>: Version control is non-negotiable for modern development.</li>
+            <li><strong>GitHub/GitLab</strong>: For hosting repositories and collaboration.</li>
+            <li><strong>VS Code</strong>: The most popular code editor with a rich extension ecosystem.</li>
+            <li><strong>Chrome DevTools</strong>: For debugging and performance analysis.</li>
+            <li><strong>Terminal/Command Line</strong>: Basic command line skills are essential.</li>
+          </ul>
+          
+          <h2>Learning Path Recommendation</h2>
+          <p>Here's a suggested learning path for beginners:</p>
+          <ol>
+            <li>HTML, CSS, and JavaScript fundamentals (2-3 months)</li>
+            <li>Responsive design and CSS frameworks like Bootstrap or Tailwind (1 month)</li>
+            <li>JavaScript deep dive, including ES6+ features (2 months)</li>
+            <li>Pick a front-end framework (React recommended for beginners) (2-3 months)</li>
+            <li>Basic back-end with Node.js and Express (2 months)</li>
+            <li>Database fundamentals with MongoDB or PostgreSQL (1 month)</li>
+            <li>Build full-stack projects to apply your knowledge</li>
+          </ol>
+          
+          <h2>Conclusion</h2>
+          <p>Web development in 2023 offers exciting opportunities but can seem overwhelming at first. Focus on mastering the fundamentals before moving to advanced topics, build projects to apply your knowledge, and stay curious about new developments in the field.</p>
+          
+          <p>Remember that becoming a proficient web developer takes time and consistent practice. Embrace the learning process, join developer communities, and don't be afraid to ask questions when you're stuck.</p>
+        </div>
+
+        <div class="post-tags">
+          <a href="#" class="post-tag">Web Development</a>
+          <a href="#" class="post-tag">Programming</a>
+          <a href="#" class="post-tag">JavaScript</a>
+          <a href="#" class="post-tag">Beginners</a>
+          <a href="#" class="post-tag">Coding</a>
+        </div>
+
+        <div class="author-bio">
+          <img src="what-is-off-facebook-activity-featured.jpg" alt="Author avatar" class="author-avatar">
+          <div class="author-info">
+            <h4>Admin</h4>
+            <p>Web developer and technical writer passionate about creating user-friendly websites and sharing knowledge with the community.</p>
+            <div class="author-social">
+              <a href="#">Twitter</a>
+              <a href="#">GitHub</a>
+              <a href="#">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="post-navigation">
+          <div class="post-nav-link">
+            <span class="post-nav-label">Previous Post</span>
+            <a href="#">5 CSS Grid Layouts for Your Next Project</a>
+          </div>
+          <div class="post-nav-link">
+            <span class="post-nav-label">Next Post</span>
+            <a href="#">10 JavaScript Tricks Every Developer Should Know</a>
+          </div>
+        </div>
+
+        <section class="post-comments">
+          <h3>Comments (3)</h3>
+          
+          <div class="comments-list">
+            <!-- Comment 1 -->
+            <div class="comment">
+              <div class="comment-author">
+                <img src="images (2).jpeg" alt="Commenter avatar">
+                <div>
+                  <h4>John Doe</h4>
+                  <span class="comment-date">June 16, 2023</span>
+                </div>
+              </div>
+              <div class="comment-content">
+                <p>Great article! I've been wanting to get into web development and this provides a clear roadmap. Thanks for sharing!</p>
+              </div>
+              <a href="#" class="comment-reply">Reply</a>
+            </div>
+            
+            <!-- Comment 2 -->
+            <div class="comment">
+              <div class="comment-author">
+                <img src="images (3).jpeg" alt="Commenter avatar">
+                <div>
+                  <h4>Jane Smith</h4>
+                  <span class="comment-date">June 17, 2023</span>
+                </div>
+              </div>
+              <div class="comment-content">
+                <p>I would also recommend learning about web accessibility. It's an important aspect of web development that's often overlooked.</p>
+              </div>
+              <a href="#" class="comment-reply">Reply</a>
+            </div>
+            
+            <!-- Comment 3 -->
+            <div class="comment">
+              <div class="comment-author">
+                <img src="images (4).jpeg" alt="Commenter avatar">
+                <div>
+                  <h4>Mike Johnson</h4>
+                  <span class="comment-date">June 18, 2023</span>
+                </div>
+              </div>
+              <div class="comment-content">
+                <p>What are your thoughts on using TypeScript with React? I've heard it helps catch errors early in the development process.</p>
+              </div>
+              <a href="#" class="comment-reply">Reply</a>
+            </div>
+          </div>
+          
+          <div class="comment-form">
+            <h3>Leave a Comment</h3>
+            <form>
+              <textarea placeholder="Your comment" rows="5" required></textarea>
+              <div class="form-row">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+              </div>
+              <button type="submit">Post Comment</button>
+            </form>
+          </div>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3>About My Blog</h3>
+          <p>A personal blog sharing insights and knowledge about web development, design, and technology.</p>
+        </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h3>Connect With Me</h3>
+          <div class="social-icons">
+            <a href="#" class="social-icon">Facebook</a>
+            <a href="#" class="social-icon">Twitter</a>
+            <a href="#" class="social-icon">Instagram</a>
+            <a href="#" class="social-icon">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 My Blog. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="blog.js"></script>
+  <script>
+    // Additional script for post page
+    document.addEventListener('DOMContentLoaded', function() {
+      // Comment form handling
+      const commentForm = document.querySelector('.comment-form form');
+      if (commentForm) {
+        commentForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Get form values
+          const comment = this.querySelector('textarea').value;
+          const name = this.querySelector('input[type="text"]').value;
+          const email = this.querySelector('input[type="email"]').value;
+          
+          if (comment && name && email) {
+            // Create new comment element (in a real app, this would be sent to a server)
+            const newComment = document.createElement('div');
+            newComment.className = 'comment new-comment';
+            newComment.innerHTML = `
+              <div class="comment-author">
+                <img src="mobile-phones-buying-guide.jpg" alt="Commenter avatar">
+                <div>
+                  <h4>${name}</h4>
+                  <span class="comment-date">Just now</span>
+                </div>
+              </div>
+              <div class="comment-content">
+                <p>${comment}</p>
+              </div>
+              <a href="#" class="comment-reply">Reply</a>
+            `;
+            
+            // Add animation class
+            newComment.style.opacity = '0';
+            newComment.style.transform = 'translateY(20px)';
+            
+            // Add to comments list
+            const commentsList = document.querySelector('.comments-list');
+            commentsList.appendChild(newComment);
+            
+            // Animate in
+            setTimeout(() => {
+              newComment.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+              newComment.style.opacity = '1';
+              newComment.style.transform = 'translateY(0)';
+            }, 10);
+            
+            // Reset form
+            this.reset();
+            
+            // Update comment count
+            const commentsTitle = document.querySelector('.post-comments h3');
+            const currentCount = parseInt(commentsTitle.textContent.match(/\d+/)[0]);
+            commentsTitle.textContent = `Comments (${currentCount + 1})`;
+          }
+        });
+      }
+      
+      // Add styles for comments
+      const style = document.createElement('style');
+      style.textContent = `
+        .comments-list {
+          margin-bottom: 40px;
+        }
+        
+        .comment {
+          margin-bottom: 30px;
+          padding-bottom: 30px;
+          border-bottom: 1px solid #eee;
+        }
+        
+        .comment:last-child {
+          border-bottom: none;
+        }
+        
+        .comment-author {
+          display: flex;
+          align-items: center;
+          margin-bottom: 15px;
+        }
+        
+        .comment-author img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          margin-right: 15px;
+        }
+        
+        .comment-author h4 {
+          margin-bottom: 5px;
+        }
+        
+        .comment-date {
+          font-size: 0.85rem;
+          color: #888;
+        }
+        
+        .comment-content {
+          margin-bottom: 10px;
+        }
+        
+        .comment-reply {
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
+        
+        .form-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 15px;
+        }
+        
+        @media (max-width: 767px) {
+          .form-row {
+            grid-template-columns: 1fr;
+          }
+        }
+        
+        .new-comment {
+          background-color: #f8f9fa;
+          padding: 20px;
+          border-radius: 8px;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  </script>
+</body>
+</html>
